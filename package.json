@@ -1,0 +1,21 @@
+{
+  "name": "ts-package-example-ephi",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts",
+    "release": "npm run build && changeset publish",
+    "lint": "tsc"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@changesets/cli": "^2.27.5",
+    "nodemon": "^3.1.3",
+    "tsup": "^8.1.0",
+    "typescript": "^5.4.5"
+  }
+}
