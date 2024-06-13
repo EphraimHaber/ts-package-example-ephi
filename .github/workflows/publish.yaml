@@ -1,0 +1,27 @@
+name: Publish
+on:
+  push:
+    branches:
+      - "master"
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - run: npm ci
+      - run: npm run lint && npm run build
+      - name: Create Release PR Or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: npm run build
